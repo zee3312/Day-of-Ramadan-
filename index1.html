@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ramadan Counter</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            /* Added high-quality atmospheric background */
+            background: url('https://images.unsplash.com') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Container alignment */
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.3); /* Subtle dark overlay to make text pop */
+        }
+
+        /* Adjusted Days Box */
+        .days-only {
+            margin-top: 250px; 
+            font-size: 70px; 
+            font-weight: bold;
+            color: #333333; 
+            text-align: center;
+            /* Semi-transparent background for a modern look */
+            background-color: rgba(248, 248, 248, 0.9); 
+            padding: 30px 60px;
+            border-radius: 20px;
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
+            min-width: 550px; 
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <div class="days-only" id="days">Day of Ramadan</div>
+    </div>
+
+    <script>
+        function updateRamadan() {
+            // Start date: Feb 19, 2026
+            const startDate = new Date("February 19, 2026 00:00:00").getTime();
+            const now = new Date().getTime();
+            const diff = now - startDate;
+            
+            const display = document.getElementById("days");
+
+            if (diff < 0) {
+                // Keep the number blank until start date
+                display.innerHTML = "Day &nbsp;&nbsp;&nbsp; of Ramadan";
+            } else {
+                const currentDay = Math.floor(diff / (1000 * 60 * 60 * 24)) + 1;
+                
+                if (currentDay <= 30) {
+                    display.innerHTML = "Day " + currentDay + " of Ramadan";
+                } else {
+                    display.innerHTML = "Eid Mubarak!";
+                }
+            }
+        }
+
+        updateRamadan();
+        setInterval(updateRamadan, 3600000); 
+    </script>
+</body>
+</html>
