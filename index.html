@@ -8,42 +8,56 @@
             padding: 0;
             height: 100%;
             overflow: hidden;
-            font-family: 'Arial', sans-serif;
-            /* Added high-quality atmospheric background */
-            background: url('https://images.unsplash.com') no-repeat center center fixed;
+            font-family: 'Georgia', serif; /* More elegant font */
+            /* New Geometric Background Design */
+            background-color: #0f172a;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(201, 161, 59, 0.1) 0%, transparent 80%),
+                url("https://www.transparenttextures.com"); /* Subtle pattern */
             background-size: cover;
         }
 
-        /* Container alignment */
         .content {
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center; /* Centered vertically */
             height: 100vh;
-            background: rgba(0, 0, 0, 0.3); /* Subtle dark overlay to make text pop */
+            background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
         }
 
-        /* Adjusted Days Box */
+        /* Glassmorphism Design */
         .days-only {
-            margin-top: 250px; 
-            font-size: 70px; 
-            font-weight: bold;
-            color: #333333; 
+            font-size: 140px; /* Twice as large */
+            font-weight: 900;
+            color: #f3ce7a; /* Gold tone */
             text-align: center;
-            /* Semi-transparent background for a modern look */
-            background-color: rgba(248, 248, 248, 0.9); 
-            padding: 30px 60px;
-            border-radius: 20px;
-            box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
-            min-width: 550px; 
-            display: inline-block;
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(15px); /* Frosty glass effect */
+            -webkit-backdrop-filter: blur(15px);
+            padding: 60px 100px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0px 25px 50px rgba(0,0,0,0.8), 
+                        inset 0 0 20px rgba(201, 161, 59, 0.2);
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            min-width: 800px;
+            letter-spacing: -2px;
+        }
+
+        /* Small decorative accent */
+        .days-only::before {
+            content: "🌙";
+            display: block;
+            font-size: 60px;
+            margin-bottom: 20px;
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
 
     <div class="content">
-        <div class="days-only" id="days">Day of Ramadan</div>
+        <div class="days-only" id="days">Loading...</div>
     </div>
 
     <script>
@@ -56,13 +70,12 @@
             const display = document.getElementById("days");
 
             if (diff < 0) {
-                // Keep the number blank until start date
-                display.innerHTML = "Day &nbsp;&nbsp;&nbsp; of Ramadan";
+                display.innerHTML = "Ramadan <br> Upcoming";
             } else {
                 const currentDay = Math.floor(diff / (1000 * 60 * 60 * 24)) + 1;
                 
                 if (currentDay <= 30) {
-                    display.innerHTML = "Day " + currentDay + " of Ramadan";
+                    display.innerHTML = "Day " + currentDay + "<br>of Ramadan";
                 } else {
                     display.innerHTML = "Eid Mubarak!";
                 }
@@ -70,7 +83,8 @@
         }
 
         updateRamadan();
-        setInterval(updateRamadan, 3600000); 
+        // Update every minute for better accuracy
+        setInterval(updateRamadan, 60000); 
     </script>
 </body>
 </html>
